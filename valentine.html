@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day po bibi!!❤️</title>
+<style>
+  body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffd6e8;
+    font-family: 'Arial', sans-serif;
+    overflow:hidden;
+  }
+
+  .card {
+    background:white;
+    padding:35px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    max-width:400px;
+    z-index:1;
+    position:relative;
+  }
+
+  .hidden { display:none; }
+
+  button {
+    background:#ff6b81;
+    border:none;
+    padding:10px 20px;
+    color:white;
+    border-radius:12px;
+    cursor:pointer;
+    margin-top:15px;
+    font-size:16px;
+  }
+  button:hover { background:#ff3b5f; }
+
+  img {
+    margin-top:15px;
+    width:100%;
+    border-radius:15px;
+  }
+
+  .heart {
+    position:absolute;
+    color:red;
+    animation:float 5s linear infinite;
+    font-size:20px;
+  }
+
+  @keyframes float {
+    0% { transform:translateY(0); opacity:1; }
+    100% { transform:translateY(-800px); opacity:0; }
+  }
+
+
+  .confetti {
+    position:absolute;
+    width:10px;
+    height:10px;
+    background-color: #ff3b5f;
+    top:0;
+    opacity:0.8;
+    z-index:0;
+  }
+
+
+  .animated-text {
+    font-size:20px;
+    font-weight:bold;
+    background: linear-gradient(90deg, #ff6b81, #ffb3c1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGlow 2s infinite alternate;
+  }
+
+  @keyframes textGlow {
+    from { filter: drop-shadow(0 0 5px #ff6b81);}
+    to { filter: drop-shadow(0 0 20px #ffb3c1);}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1 class="animated-text">Happy Valentine's Day, Bibi!! ❤️</h1>
+  <p class="animated-text">lab na lab kita everyweek,everyday, everymoring, everynon, everyafternon, everynight, everyhour, every minutes
+    , everyseconds and everymilliseconds!! forever and ever :>>
+  </p>
+
+  <button id="surpriseBtn">Click for a surprise</button>
+  <p id="message" class="hidden animated-text">
+    I love the way you smile, the way you care, and the way you make life feel magical. ❤️
+  </p>
+
+  <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
+
+  <button id="galleryBtn" style="margin-top:20px;">Go to Gallery</button>
+</div>
+
+
+<audio id="bgMusic" src="always.mp3" autoplay loop></audio>
+
+<script>
+ 
+  const btn = document.getElementById("surpriseBtn");
+  const message = document.getElementById("message");
+  const photo = document.getElementById("photo");
+
+  btn.addEventListener("click", () => {
+    message.classList.remove("hidden");
+    photo.classList.remove("hidden");
+  });
+
+
+  document.getElementById("galleryBtn").addEventListener("click", () => {
+    window.location.href="gallery.html";
+  });
+
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(12+Math.random()*25)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+
+
+  setInterval(() => {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random()*100+"vw";
+    confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(confetti);
+    let fall = setInterval(() => {
+      let top = parseFloat(confetti.style.top || 0);
+      if(top>window.innerHeight){
+        clearInterval(fall);
+        confetti.remove();
+      } else {
+        confetti.style.top = top + 5 + "px";
+      }
+    },20);
+  },150);
+</script>
+</body>
+</html>
