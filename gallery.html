@@ -14,9 +14,11 @@
   button:hover { background:#ff3b5f;}
 </style>
 </head>
+
 <body>
 <div class="card">
 <h1>cute pic ng baby ko💕</h1>
+
 <div class="gallery">
   <img src="baby1.jpg" alt="Memory">
   <img src="baby4.jpg" alt="Memory">
@@ -25,10 +27,11 @@
   <img src="baby7.jpg" alt="Memory">
   <img src="baby2.jpg" alt="Memory">
 </div>
+
 <button onclick="window.location.href='valentine.html'">Back</button>
 </div>
+
 <audio id="bgMusic" src="always.mp3" preload="auto" loop></audio>
-</body>
 
 <script>
 const music = document.getElementById("bgMusic");
@@ -50,4 +53,6 @@ setInterval(() => {
     localStorage.setItem("musicTime", music.currentTime);
 }, 800);
 </script>
+
+</body>
 </html>
