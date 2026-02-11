@@ -111,6 +111,8 @@
   const btn = document.getElementById("surpriseBtn");
   const message = document.getElementById("message");
   const photo = document.getElementById("photo");
+  const music = document.getElementById("bgMusic");
+
 
   btn.addEventListener("click", () => {
     message.classList.remove("hidden");
@@ -118,16 +120,17 @@
   });
 
 
-document.addEventListener("click", function startMusicOnce() {
-    // Remove the listener so it only runs on the first tap
-    document.removeEventListener("click", startMusicOnce);
+const lastTime = localStorage.getItem("musicTime");
+if (lastTime) music.currentTime = lastTime;
 
-    // Start a 30-second timer
-    setTimeout(function() {
-        document.getElementById("bgMusic").play();
-    }, 30000); 
+document.addEventListener("click", function startOnce() {
+    music.play();
+    document.removeEventListener("click", startOnce);
 });
 
+setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+}, 500);
  document.getElementById("galleryBtn").addEventListener("click", () => {
     window.location.href="gallery.html";
   });
