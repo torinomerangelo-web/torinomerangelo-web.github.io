@@ -29,4 +29,22 @@
 </div>
 <audio id="bgMusic" src="always.mp3" autoplay loop></audio>
 </body>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+// Load last position
+const lastTime = localStorage.getItem("musicTime");
+if (lastTime) music.currentTime = lastTime;
+
+// Allow start on first tap
+document.addEventListener("click", function startOnce() {
+    music.play();
+    document.removeEventListener("click", startOnce);
+});
+
+// Save time every 500ms
+setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+}, 500);
 </html>
