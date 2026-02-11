@@ -33,18 +33,21 @@
 <script>
 const music = document.getElementById("bgMusic");
 
-// Load last position
 const lastTime = localStorage.getItem("musicTime");
-if (lastTime) music.currentTime = lastTime;
+if (lastTime) {
+    music.currentTime = parseFloat(lastTime);
+}
 
-// Allow start on first tap
-document.addEventListener("click", function startOnce() {
-    music.play();
-    document.removeEventListener("click", startOnce);
-});
+function startMusic() {
+    music.play().catch(() => {});
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+}
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
 
-// Save time every 500ms
 setInterval(() => {
     localStorage.setItem("musicTime", music.currentTime);
-}, 500);
+}, 800);
+</script>
 </html>
