@@ -39,15 +39,15 @@
 
   .hidden { display:none; }
 
-  /* Scrollable surprise message */
-  #surpriseMessage {
-    max-height:150px;
+  /* Surprise message scroll container */
+  #surpriseContainer {
+    max-height:200px;
     overflow-y:auto;
+    -webkit-overflow-scrolling: touch; /* smooth scroll for iOS */
     padding:10px;
     border:1px solid #ffb3c1;
     border-radius:12px;
     margin-top:15px;
-    -webkit-overflow-scrolling: touch; /* smooth scroll for iOS */
   }
 
   img {
@@ -106,10 +106,12 @@
     <button id="surpriseBtn">Click for a surprise</button>
   </div>
 
-  <!-- Surprise message (hidden initially) -->
-  <p id="surpriseMessage" class="hidden animated-text">
-    Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
-  </p>
+  <!-- Surprise message (scrollable) -->
+  <div id="surpriseContainer" class="hidden">
+    <p class="animated-text">
+      Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
+    </p>
+  </div>
 
   <!-- Hidden photo -->
   <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
@@ -123,18 +125,18 @@
 <script>
   const surpriseBtn = document.getElementById("surpriseBtn");
   const originalMessage = document.getElementById("originalMessage");
-  const surpriseMessage = document.getElementById("surpriseMessage");
+  const surpriseContainer = document.getElementById("surpriseContainer");
   const photo = document.getElementById("photo");
   const music = document.getElementById("bgMusic");
 
-  // Show surprise message and photo, hide original
+  // Show surprise message & photo, hide original
   surpriseBtn.addEventListener("click", () => {
     originalMessage.classList.add("hidden");
-    surpriseMessage.classList.remove("hidden");
+    surpriseContainer.classList.remove("hidden");
     photo.classList.remove("hidden");
   });
 
-  // Music: resume from last position
+  // Music resume from last position
   const lastTime = localStorage.getItem("musicTime");
   if(lastTime) music.currentTime = parseFloat(lastTime);
 
@@ -183,7 +185,6 @@
       }
     },20);
   },150);
-
 </script>
 
 </body>
