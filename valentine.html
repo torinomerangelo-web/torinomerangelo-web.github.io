@@ -14,7 +14,6 @@
     position:relative;
   }
 
-  /* Card styling */
   .card {
     background:white;
     padding:35px;
@@ -40,14 +39,15 @@
 
   .hidden { display:none; }
 
-  #message {
+  /* Scrollable surprise message */
+  #surpriseMessage {
     max-height:150px;
     overflow-y:auto;
     padding:10px;
     border:1px solid #ffb3c1;
     border-radius:12px;
     margin-top:15px;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* smooth scroll for iOS */
   }
 
   img {
@@ -96,22 +96,24 @@
 </head>
 <body>
 
-<!-- Card container -->
-<div class="card" id="card">
-  <h1 class="animated-text">Happy Valentine's Day, Bibi!! ❤️</h1>
+<div class="card">
+  <!-- Original message -->
+  <div id="originalMessage">
+    <h1 class="animated-text">Happy Valentine's Day, Bibi!! ❤️</h1>
+    <p class="animated-text">
+      lab na lab kita everyweek,everyday, everymoring, everynon, everyafternon, everynight, everyhour, every minutes , everyseconds and everymilliseconds!! forever and ever :>>
+    </p>
+    <button id="surpriseBtn">Click for a surprise</button>
+  </div>
 
-  <!-- Surprise button -->
-  <button id="surpriseBtn">Click for a surprise</button>
-
-  <!-- Hidden message -->
-  <p id="message" class="hidden animated-text">
+  <!-- Surprise message (hidden initially) -->
+  <p id="surpriseMessage" class="hidden animated-text">
     Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
   </p>
 
   <!-- Hidden photo -->
   <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
 
-  <!-- Go to gallery button -->
   <button id="galleryBtn">Go to Gallery</button>
 </div>
 
@@ -119,23 +121,23 @@
 <audio id="bgMusic" src="always.mp3" preload="auto" loop></audio>
 
 <script>
-  // Elements
-  const btn = document.getElementById("surpriseBtn");
-  const message = document.getElementById("message");
+  const surpriseBtn = document.getElementById("surpriseBtn");
+  const originalMessage = document.getElementById("originalMessage");
+  const surpriseMessage = document.getElementById("surpriseMessage");
   const photo = document.getElementById("photo");
   const music = document.getElementById("bgMusic");
 
-  // Show surprise message and photo
-  btn.addEventListener("click", () => {
-    message.classList.remove("hidden");
+  // Show surprise message and photo, hide original
+  surpriseBtn.addEventListener("click", () => {
+    originalMessage.classList.add("hidden");
+    surpriseMessage.classList.remove("hidden");
     photo.classList.remove("hidden");
   });
 
-  // Music: load last position
+  // Music: resume from last position
   const lastTime = localStorage.getItem("musicTime");
-  if (lastTime) music.currentTime = parseFloat(lastTime);
+  if(lastTime) music.currentTime = parseFloat(lastTime);
 
-  // Start music on first tap
   function startMusic() {
     music.play().catch(()=>{});
     document.removeEventListener("click", startMusic);
@@ -144,10 +146,9 @@
   document.addEventListener("click", startMusic);
   document.addEventListener("touchstart", startMusic);
 
-  // Save music progress
-  setInterval(() => {
+  setInterval(()=>{
     localStorage.setItem("musicTime", music.currentTime);
-  }, 500);
+  },500);
 
   // Go to gallery
   document.getElementById("galleryBtn").addEventListener("click", () => {
