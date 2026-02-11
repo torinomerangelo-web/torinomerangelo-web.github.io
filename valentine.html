@@ -3,31 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine's Day po bibi!!❤️</title>
+<title>Valentine Surprise ❤️</title>
 <style>
   body {
     margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    font-family: Arial, sans-serif;
     background:#ffd6e8;
-    font-family: 'Arial', sans-serif;
-    overflow:hidden;
+    text-align:center;
+    overflow-x:hidden;
+    position:relative;
   }
 
+  /* Card styling */
   .card {
     background:white;
     padding:35px;
     border-radius:22px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
     max-width:400px;
-    z-index:1;
+    margin:50px auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
     position:relative;
+    z-index:1;
   }
-
-  .hidden { display:none; }
 
   button {
     background:#ff6b81;
@@ -41,36 +38,48 @@
   }
   button:hover { background:#ff3b5f; }
 
+  .hidden { display:none; }
+
+  #message {
+    max-height:150px;
+    overflow-y:auto;
+    padding:10px;
+    border:1px solid #ffb3c1;
+    border-radius:12px;
+    margin-top:15px;
+    -webkit-overflow-scrolling: touch;
+  }
+
   img {
     margin-top:15px;
     width:100%;
     border-radius:15px;
   }
 
+  /* Floating hearts */
   .heart {
     position:absolute;
     color:red;
-    animation:float 5s linear infinite;
     font-size:20px;
+    animation:float 5s linear infinite;
+    z-index:0;
   }
-
   @keyframes float {
     0% { transform:translateY(0); opacity:1; }
     100% { transform:translateY(-800px); opacity:0; }
   }
 
-
+  /* Confetti */
   .confetti {
     position:absolute;
     width:10px;
     height:10px;
-    background-color: #ff3b5f;
     top:0;
     opacity:0.8;
     z-index:0;
   }
 
-
+  /* Animated gradient text */
   .animated-text {
     font-size:20px;
     font-weight:bold;
@@ -79,7 +88,6 @@
     -webkit-text-fill-color: transparent;
     animation: textGlow 2s infinite alternate;
   }
-
   @keyframes textGlow {
     from { filter: drop-shadow(0 0 5px #ff6b81);}
     to { filter: drop-shadow(0 0 20px #ffb3c1);}
@@ -87,54 +95,66 @@
 </style>
 </head>
 <body>
-<div class="card">
+
+<!-- Card container -->
+<div class="card" id="card">
   <h1 class="animated-text">Happy Valentine's Day, Bibi!! ❤️</h1>
-  <p class="animated-text">lab na lab kita everyweek,everyday, everymoring, everynon, everyafternon, everynight, everyhour, every minutes
-    , everyseconds and everymilliseconds!! forever and ever :>>
+
+  <!-- Surprise button -->
+  <button id="surpriseBtn">Click for a surprise</button>
+
+  <!-- Hidden message -->
+  <p id="message" class="hidden animated-text">
+    Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
   </p>
 
-  <button id="surpriseBtn">Click for a surprise</button>
-  <p id="message" class="hidden animated-text" style="max-height:150px; overflow-y:auto; padding:5px; border:1px solid #ffb3c1; border-radius:12px;">
-  Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
-</p>
+  <!-- Hidden photo -->
   <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
 
-  <button id="galleryBtn" style="margin-top:20px;">Go to Gallery</button>
+  <!-- Go to gallery button -->
+  <button id="galleryBtn">Go to Gallery</button>
 </div>
 
-
+<!-- Background music -->
 <audio id="bgMusic" src="always.mp3" preload="auto" loop></audio>
 
 <script>
- 
+  // Elements
   const btn = document.getElementById("surpriseBtn");
   const message = document.getElementById("message");
   const photo = document.getElementById("photo");
   const music = document.getElementById("bgMusic");
 
-
+  // Show surprise message and photo
   btn.addEventListener("click", () => {
     message.classList.remove("hidden");
     photo.classList.remove("hidden");
   });
 
+  // Music: load last position
+  const lastTime = localStorage.getItem("musicTime");
+  if (lastTime) music.currentTime = parseFloat(lastTime);
 
-const lastTime = localStorage.getItem("musicTime");
-if (lastTime) music.currentTime = lastTime;
+  // Start music on first tap
+  function startMusic() {
+    music.play().catch(()=>{});
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+  }
+  document.addEventListener("click", startMusic);
+  document.addEventListener("touchstart", startMusic);
 
-document.addEventListener("click", function startOnce() {
-    music.play();
-    document.removeEventListener("click", startOnce);
-});
-
-setInterval(() => {
+  // Save music progress
+  setInterval(() => {
     localStorage.setItem("musicTime", music.currentTime);
-}, 500);
- document.getElementById("galleryBtn").addEventListener("click", () => {
+  }, 500);
+
+  // Go to gallery
+  document.getElementById("galleryBtn").addEventListener("click", () => {
     window.location.href="gallery.html";
   });
 
-
+  // Floating hearts
   setInterval(() => {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -145,7 +165,7 @@ setInterval(() => {
     setTimeout(()=>heart.remove(),5000);
   },300);
 
-
+  // Confetti
   setInterval(() => {
     const confetti = document.createElement("div");
     confetti.classList.add("confetti");
@@ -162,6 +182,8 @@ setInterval(() => {
       }
     },20);
   },150);
+
 </script>
+
 </body>
 </html>
