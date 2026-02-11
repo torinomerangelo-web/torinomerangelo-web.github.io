@@ -118,7 +118,17 @@
   });
 
 
-  document.getElementById("galleryBtn").addEventListener("click", () => {
+document.addEventListener("click", function startMusicOnce() {
+    // Remove the listener so it only runs on the first tap
+    document.removeEventListener("click", startMusicOnce);
+
+    // Start a 30-second timer
+    setTimeout(function() {
+        document.getElementById("bgMusic").play();
+    }, 30000); 
+});
+
+ document.getElementById("galleryBtn").addEventListener("click", () => {
     window.location.href="gallery.html";
   });
 
