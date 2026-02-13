@@ -4,31 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Photo Gallery ❤️</title>
+
 <style>
-  body { margin:0; height:100vh; display:flex; justify-content:center; align-items:center; background:#ffd6e8; font-family:Arial,sans-serif;}
-  .card { background:white; padding:35px; border-radius:22px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.1); max-width:500px; width:90%;}
-  .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; margin-top:20px;}
-  .gallery img { width:100%; border-radius:15px; cursor:pointer; transition: transform 0.3s;}
-  .gallery img:hover { transform: scale(1.05); }
-  button { margin-top:20px; padding:10px 20px; border:none; border-radius:12px; background:#ff6b81; color:white; cursor:pointer; font-size:16px;}
-  button:hover { background:#ff3b5f;}
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffd6e8;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Make the card scrollable */
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 90%;
+    height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Gallery becomes scrollable inside the card */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .gallery img {
+    width: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #ff6b81;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background: #ff3b5f;
+  }
 </style>
 </head>
 
 <body>
+
 <div class="card">
-<h1>cute pic ng baby ko💕</h1>
+  <h1>cute pic ng baby ko💕</h1>
 
-<div class="gallery">
-  <img src="baby1.jpg" alt="Memory">
-  <img src="baby4.jpg" alt="Memory">
-  <img src="baby3.jpg" alt="Memory">
-  <img src="baby6.jpg" alt="Memory">
-  <img src="baby7.jpg" alt="Memory">
-  <img src="baby2.jpg" alt="Memory">
-</div>
+  <div class="gallery">
+    <img src="baby1.jpg" alt="Memory">
+    <img src="baby4.jpg" alt="Memory">
+    <img src="baby3.jpg" alt="Memory">
+    <img src="baby6.jpg" alt="Memory">
+    <img src="baby7.jpg" alt="Memory">
+    <img src="baby2.jpg" alt="Memory">
 
-<button onclick="window.location.href='valentine.html'">Back</button>
+    <!-- Add unlimited pictures here -->
+    <img src="baby8.jpg" alt="Memory">
+    <img src="baby9.jpg" alt="Memory">
+    <img src="baby10.jpg" alt="Memory">
+    <img src="baby11.jpg" alt="Memory">
+  </div>
+
+  <button onclick="window.location.href='valentine.html'">Back</button>
 </div>
 
 <audio id="bgMusic" src="always.mp3" preload="auto" loop></audio>
@@ -46,6 +104,7 @@ function startMusic() {
     document.removeEventListener("click", startMusic);
     document.removeEventListener("touchstart", startMusic);
 }
+
 document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
 
