@@ -56,7 +56,7 @@
     border-radius:15px;
   }
 
-  /* Floating hearts */
+  
   .heart {
     position:absolute;
     color:red;
@@ -69,7 +69,7 @@
     100% { transform:translateY(-800px); opacity:0; }
   }
 
-  /* Confetti */
+  
   .confetti {
     position:absolute;
     width:10px;
@@ -79,7 +79,7 @@
     z-index:0;
   }
 
-  /* Animated gradient text */
+  
   .animated-text {
     font-size:20px;
     font-weight:bold;
@@ -97,7 +97,7 @@
 <body>
 
 <div class="card">
-  <!-- Original message -->
+  
   <div id="originalMessage">
     <h1 class="animated-text">Happy Valentine's Day, Bibi!! ❤️</h1>
     <p class="animated-text">
@@ -109,17 +109,21 @@
   <!-- Surprise message (scrollable) -->
   <div id="surpriseContainer" class="hidden">
     <p class="animated-text">
-      Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I love you so much! 💖
+      Happy Valentines Day baby!! Maraming salamat sa isang taon nating pagsasama. We know na madami tayong pagsubok na pinagdaanan, pero thank you for staying with me kahit na sobrang panget ng ugali ko recently. For me, you are the best girl na meet ko. Always nandyan kung kailan kailangan lalo na sa school hehe, super appreciated po sa pag help sa akin last time. I hope we can be strong pa sa mga susunod na araw, linggo,buwan,at taon. I am so proud of you po baby kasi sobrang ta-tag mo kahit sobrang toxic ng pinapakita ko sa iyo, yeap tama ka sa sinasabi mo na ginagawa ko 'yun kasi alam kong hindi mo ko kayang iwan but ginagawa ko lang talaga yun para ma-test ko lang kung hanggang saan ba talaga tayo. Worth it naman resulta i see after 1 year we can be together parin with healthy relationship. 
+
+Wish ko po sa ating dalawa sana we can grow na mag kasama tayo lalo na this upcoming college ko, sana nandiyan ka pa rin sa mga downtimes ko sa college if we got success sana magkasama pa rin tayo syempreeeeee we grow na mag kasama ngaaaaa diba alangan naman iba kasama moooo sino yan?! joke huhuhuhu excited na ako sa paldo days natin maliit na kwarto sa taas yung higaan tas sa baba yung pc setup ahhhh sarap. Sorry maikli lang utak ko for now baby. 
+
+Happy Valentines Day ulit, Baby!
+
+I love you so much! 💖
     </p>
   </div>
 
-  <!-- Hidden photo -->
-  <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
+ <img id="photo" src="baby3.jpg" alt="Our Memory" class="hidden">
 
   <button id="galleryBtn">Go to Gallery</button>
 </div>
 
-<!-- Background music -->
 <audio id="bgMusic" src="always.mp3" preload="auto" loop></audio>
 
 <script>
@@ -129,14 +133,14 @@
   const photo = document.getElementById("photo");
   const music = document.getElementById("bgMusic");
 
-  // Show surprise message & photo, hide original
+  
   surpriseBtn.addEventListener("click", () => {
     originalMessage.classList.add("hidden");
     surpriseContainer.classList.remove("hidden");
     photo.classList.remove("hidden");
   });
 
-  // Music resume from last position
+  
   const lastTime = localStorage.getItem("musicTime");
   if(lastTime) music.currentTime = parseFloat(lastTime);
 
@@ -152,7 +156,7 @@
     localStorage.setItem("musicTime", music.currentTime);
   },500);
 
-  // Go to gallery
+  
   document.getElementById("galleryBtn").addEventListener("click", () => {
     window.location.href="gallery.html";
   });
@@ -168,7 +172,7 @@
     setTimeout(()=>heart.remove(),5000);
   },300);
 
-  // Confetti
+  
   setInterval(() => {
     const confetti = document.createElement("div");
     confetti.classList.add("confetti");
